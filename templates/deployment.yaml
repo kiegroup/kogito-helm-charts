@@ -39,11 +39,19 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
+              {{- if eq .Values.runtime "quarkus" }}
               path: /q/health/live
+              {{- else if eq .Values.runtime "springboot" }}
+              path: /actuator/health/liveness
+              {{- end }}
               port: http
           readinessProbe:
             httpGet:
+              {{- if eq .Values.runtime "quarkus" }}
               path: /q/health/ready
+              {{- else if eq .Values.runtime "springboot" }}
+              path: /actuator/health/readiness
+              {{- end }}
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

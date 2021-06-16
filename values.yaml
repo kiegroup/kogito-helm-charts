@@ -4,9 +4,11 @@
 
 replicaCount: 1
 
+runtime: quarkus
+
 image:
   repository: quay.io/kmok/process-quarkus-example
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
