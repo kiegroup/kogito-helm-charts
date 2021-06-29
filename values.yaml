@@ -7,7 +7,9 @@ replicaCount: 1
 runtime: quarkus
 
 image:
-  repository: quay.io/kmok/process-quarkus-example
+  # repository: quay.io/kmok/process-quarkus-example
+  # repository: quay.io/kmok/process-springboot-example
+  repository: quay.io/kmok/kogito-travel-agency-basic
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -44,7 +46,11 @@ securityContext: {}
 service:
   type: NodePort
   port: 8080
+  nodePort: 32000
   targetPort: 8080
+prometheus:
+  enabled: true
+  nodePort: 32001
 
 ingress:
   enabled: false
