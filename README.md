@@ -73,3 +73,15 @@ namespace.
 You can access the web console at `http://$NODE_INTERNAL_IP:32001/graph` following the [Example Usage](#example-usage) above.
 
 To disable the Prometheus integration, you can set the `Values.prometheus.enabled` to `false`. 
+
+# Road Map
+## Operator-Less
+- PostgreSQL (WIP)
+- Kafka
+- data index (requires 2 above)
+
+## With Operator
+- ~~Prometheus~~
+- Infinispan (WIP)
+- Kafka (WIP)
+- data index (requires 2 above)
