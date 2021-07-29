@@ -1,60 +1,13 @@
-# Kogito Helm Chart
-This is a Helm chart to deploy a Kogito application with no frills. 
+# Kogito PostgreSQL Helm Chart
+This is a Helm chart to deploy a Kogito application with PostgreSQL 
+persistence. 
 
 # Example Usage
-By default, this will deploy the basic Kogito [travel agency 
-example](https://github.com/kiegroup/kogito-examples/tree/stable/kogito-travel-agency/basic) 
+By default, this will deploy the Kogito [process-postgresql-persistence-quarkus](https://github.com/kiegroup/kogito-examples/tree/stable/process-postgresql-persistence-quarkus) 
 image which I have uploaded onto 
-[Quay](https://quay.io/repository/kmok/kogito-travel-agency-basic?tab=tags). 
+[Quay](https://quay.io/repository/kmok/process-postgresql-persistence-quarkus?tab=tags). The 
+image is compiled using the `jdbc-persistence`. Follow the [initial setup](../README.md#Usage), then run these commands:
 ```sh
-kubectl create namespace kogito-helm
-git clone https://github.com/Kevin-Mok/kogito-helm-chart.git
-helm install --namespace kogito-helm travel-agency-basic kogito-helm-chart
-export NODE_INTERNAL_IP=$(kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }')
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST "http://$NODE_INTERNAL_IP:32000/travels" -d @- << EOF
-{
-  "traveller" : {
-    "firstName" : "John",
-    "lastName" : "Doe",
-    "email" : "john.doe@example.com",
-    "nationality" : "American",
-    "address" : {
-      "street" : "main street",
-      "city" : "Boston",
-      "zipCode" : "10005",
-      "country" : "US"
-    }
-  },
-  "trip" : {
-    "city" : "New York",
-    "country" : "US",
-    "begin" : "2019-12-10T00:00:00.000+02:00",
-    "end" : "2019-12-15T00:00:00.000+02:00"
-  }
-}
-EOF
+helm install process-postgresql-persistence-quarkus kogito-postgresql
+curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://$NODE_INTERNAL_IP:32000/deals
 ```
-
-## Customizing Values
-To change the image deployed or any of the other default 
-values specified in [values.yaml](values.yaml), you can 
-simply create another values file and run `helm install` 
-with the `--values` flag and your values file name. For example:
-```sh
-cat << EOF > myvals.yaml
-runtime: springboot
-image:
-  repository: quay.io/kmok/process-springboot-example
-EOF
-helm install --namespace kogito-helm --values myvals.yaml process-springboot-example kogito-helm-chart
-```
-
-Or in the case like this one where you only have a couple 
-values to change, you can also specify values directly in 
-the command like so:
-```sh
-helm install --namespace kogito-helm --set image.repository=quay.io/kmok/process-springboot-example,runtime=springboot process-springboot-example kogito-helm-chart
-```
-
-# Applications Exposed By Default
-For ease of use and demonstration purposes, the Kogito application will be exposed with a `NodePort` by default and uses port 32000.
