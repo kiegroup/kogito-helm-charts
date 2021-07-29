@@ -1,0 +1,25 @@
+{{- if .Values.prometheus.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: {{ .Release.Name }}-prometheus
+spec:
+  serviceAccountName: prometheus-operator
+  serviceMonitorSelector:
+    matchLabels:
+      app: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-prometheus-np
+spec:
+  type: NodePort
+  ports:
+  - port: 9090
+    nodePort: {{ .Values.prometheus.nodePort }}
+    protocol: TCP
+    targetPort: web
+  selector:
+    prometheus: {{ .Release.Name }}-prometheus
+{{- end }}
