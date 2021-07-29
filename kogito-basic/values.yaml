@@ -48,9 +48,6 @@ service:
   port: 8080
   nodePort: 32000
   targetPort: 8080
-prometheus:
-  enabled: true
-  nodePort: 32001
 
 ingress:
   enabled: false

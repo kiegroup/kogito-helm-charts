@@ -1,5 +1,5 @@
 # Kogito Helm Chart
-This is a Helm chart to deploy a Kogito application with Prometheus integration. 
+This is a Helm chart to deploy a Kogito application with no frills. 
 
 # Example Usage
 By default, this will deploy the basic Kogito [travel agency 
@@ -57,31 +57,4 @@ helm install --namespace kogito-helm --set image.repository=quay.io/kmok/process
 ```
 
 # Applications Exposed By Default
-For ease of use and demonstration purposes, both the Kogito application and Prometheus 
-instance will be exposed with `NodePort`'s by default; they use ports 32000 
-and 32001 respectively.
-
-# Prometheus Integration
-Prometheus monitoring is enabled by default. As such, a 
-Prometheus instance will be created upon installation given 
-that the Prometheus operator is installed. If not installed, 
-please see the [Prometheus operator README](https://github.com/prometheus-operator/prometheus-operator#quickstart) 
-for instructions on installing the operator. Note that their 
-`bundle.yaml` defaults to installing in the `default` 
-namespace.
-
-You can access the web console at `http://$NODE_INTERNAL_IP:32001/graph` following the [Example Usage](#example-usage) above.
-
-To disable the Prometheus integration, you can set the `Values.prometheus.enabled` to `false`. 
-
-# Road Map
-## Operator-Less
-- PostgreSQL (WIP)
-- Kafka
-- data index (requires 2 above)
-
-## With Operator
-- ~~Prometheus~~
-- Infinispan (WIP)
-- Kafka (WIP)
-- data index (requires 2 above)
+For ease of use and demonstration purposes, the Kogito application will be exposed with a `NodePort` by default and uses port 32000.
