@@ -24,6 +24,6 @@ version: 0.1.0
 appVersion: "1.8.0"
 
 dependencies:
-- name: postgresql
-  version: "10.8.0"
+- name: kafka
+  version: "13.1.5"
   repository: "https://charts.bitnami.com/bitnami"
