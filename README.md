@@ -40,12 +40,13 @@ For ease of use and demonstration purposes, the Kogito application will be expos
 
 # Road Map
 ## Operator-Less
-- PostgreSQL (WIP)
-- Kafka
+- ~~PostgreSQL~~
+- ~~Kafka~~
 - data index (requires 2 above)
 
 ## With Operator
 - ~~Prometheus~~
-- Infinispan (WIP)
-- Kafka (WIP)
+- KogitoRuntime
+- Infinispan
+- Kafka
 - data index (requires 2 above)
