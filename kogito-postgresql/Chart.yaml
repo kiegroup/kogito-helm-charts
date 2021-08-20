@@ -1,6 +1,6 @@
 apiVersion: v2
-name: kogito-app
-description: A Helm chart for a Kogito application.
+name: kogito-postgresql
+description: A Helm chart for a Kogito application with a PostgreSQL dependency.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
