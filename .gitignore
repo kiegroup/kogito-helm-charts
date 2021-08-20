@@ -1,5 +1,5 @@
 *.log
-*.tgz
+*/*/*.tgz
 
 *-values.yaml
 commit-msg.txt
