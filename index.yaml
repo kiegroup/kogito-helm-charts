@@ -1,0 +1,56 @@
+apiVersion: v1
+entries:
+  kogito-basic:
+  - apiVersion: v2
+    appVersion: 1.8.0
+    created: "2021-08-20T16:58:31.975992126Z"
+    description: A Helm chart for a basic Kogito application.
+    digest: 1d6af749e5c8bfcb30fd6722e4aa9b09c5c6290cccbf34f483f4e739b442ed1b
+    name: kogito-basic
+    type: application
+    urls:
+    - https://kiegroup.github.io/kogito-helm-charts/kogito-basic-0.1.0.tgz
+    version: 0.1.0
+  kogito-kafka:
+  - apiVersion: v2
+    appVersion: 1.8.0
+    created: "2021-08-20T16:58:31.984212765Z"
+    dependencies:
+    - name: kafka
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.1.5
+    description: A Helm chart for a Kogito application with a Kafka dependency.
+    digest: 97bb4f5531d432e204f2d8c41d3f388db51648d51bc9a9436356e690b12fab3c
+    name: kogito-kafka
+    type: application
+    urls:
+    - https://kiegroup.github.io/kogito-helm-charts/kogito-kafka-0.1.0.tgz
+    version: 0.1.0
+  kogito-postgresql:
+  - apiVersion: v2
+    appVersion: 1.8.0
+    created: "2021-08-20T16:58:31.990044064Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.8.0
+    description: A Helm chart for a Kogito application with a PostgreSQL dependency.
+    digest: b63324b2ac2878e1e1fdbd062d808545e448cf83516afa742b704a503f963a0c
+    name: kogito-postgresql
+    type: application
+    urls:
+    - https://kiegroup.github.io/kogito-helm-charts/kogito-postgresql-0.1.0.tgz
+    version: 0.1.0
+  kogito-prometheus-operator:
+  - apiVersion: v2
+    appVersion: 1.8.0
+    created: "2021-08-20T16:58:31.990657175Z"
+    description: A Helm chart for a Kogito application with integration with the Prometheus
+      operator.
+    digest: ebba326a269aef3670943c118e6f8e9fe4c21b0bbe62729521c20cf68a1eba97
+    name: kogito-prometheus-operator
+    type: application
+    urls:
+    - https://kiegroup.github.io/kogito-helm-charts/kogito-prometheus-operator-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-08-20T16:58:31.9744867Z"
