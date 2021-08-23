@@ -6,10 +6,23 @@ persistence.
 By default, this will deploy the Kogito [process-postgresql-persistence-quarkus](https://github.com/kiegroup/kogito-examples/tree/stable/process-postgresql-persistence-quarkus) 
 image which I have uploaded onto 
 [Quay](https://quay.io/repository/kmok/process-postgresql-persistence-quarkus?tab=tags). The 
-image is compiled using the `jdbc-persistence`. Follow the [initial setup](../README.md#Usage), then run these commands:
+image is compiled using the `jdbc-persistence`. Follow the [initial setup](../README.md#Usage), then run these commands
+in the base directory of the repository:
+## OpenShift
 ```sh
 helm install process-postgresql-persistence-quarkus kogito/kogito-postgresql
-curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://$NODE_INTERNAL_IP:32000/deals
+export KOGITO_URL=$(kubectl get routes -o jsonpath="{.items[?(@.metadata.name=='process-postgresql-persistence-quarkus')].spec.host}")
+```
+
+## Other (e.g. minikube)
+```sh
+helm install --set openshift=false process-postgresql-persistence-quarkus kogito/kogito-postgresql
+export KOGITO_URL=$(kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }'):32000
+```
+
+## Expected Output
+```
+> curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://$KOGITO_URL/deals
 ```
 
 # PostgreSQL Setup
