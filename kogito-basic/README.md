@@ -1,60 +1,11 @@
-# Kogito Helm Chart
+# Kogito Basic Helm Chart
 This is a Helm chart to deploy a Kogito application with no frills. 
 
 # Example Usage
-By default, this will deploy the basic Kogito [travel agency 
-example](https://github.com/kiegroup/kogito-examples/tree/stable/kogito-travel-agency/basic) 
+By default, this will deploy the basic Kogito [process-quarkus-example](https://github.com/kiegroup/kogito-examples/tree/stable/process-quarkus-example) 
 image which I have uploaded onto 
-[Quay](https://quay.io/repository/kmok/kogito-travel-agency-basic?tab=tags). 
+[Quay](https://quay.io/repository/kmok/process-quarkus-example?tab=tags). Follow the [initial setup](../README.md#Usage), then run these commands:
 ```sh
-kubectl create namespace kogito-helm
-git clone https://github.com/Kevin-Mok/kogito-helm-chart.git
-helm install --namespace kogito-helm travel-agency-basic kogito-helm-chart
-export NODE_INTERNAL_IP=$(kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }')
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST "http://$NODE_INTERNAL_IP:32000/travels" -d @- << EOF
-{
-  "traveller" : {
-    "firstName" : "John",
-    "lastName" : "Doe",
-    "email" : "john.doe@example.com",
-    "nationality" : "American",
-    "address" : {
-      "street" : "main street",
-      "city" : "Boston",
-      "zipCode" : "10005",
-      "country" : "US"
-    }
-  },
-  "trip" : {
-    "city" : "New York",
-    "country" : "US",
-    "begin" : "2019-12-10T00:00:00.000+02:00",
-    "end" : "2019-12-15T00:00:00.000+02:00"
-  }
-}
-EOF
+helm install process-quarkus-example kogito-basic
+curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" -X POST http://$NODE_INTERNAL_IP:32000/orders
 ```
-
-## Customizing Values
-To change the image deployed or any of the other default 
-values specified in [values.yaml](values.yaml), you can 
-simply create another values file and run `helm install` 
-with the `--values` flag and your values file name. For example:
-```sh
-cat << EOF > myvals.yaml
-runtime: springboot
-image:
-  repository: quay.io/kmok/process-springboot-example
-EOF
-helm install --namespace kogito-helm --values myvals.yaml process-springboot-example kogito-helm-chart
-```
-
-Or in the case like this one where you only have a couple 
-values to change, you can also specify values directly in 
-the command like so:
-```sh
-helm install --namespace kogito-helm --set image.repository=quay.io/kmok/process-springboot-example,runtime=springboot process-springboot-example kogito-helm-chart
-```
-
-# Applications Exposed By Default
-For ease of use and demonstration purposes, the Kogito application will be exposed with a `NodePort` by default and uses port 32000.
