@@ -7,9 +7,8 @@ By default, each chart will deploy a specific [Kogito example](https://github.co
 where the chart will deploy any required infrastructure. Each chart's usage section will assume you have the 
 following setup:
 ```sh
+helm repo add kogito https://kiegroup.github.io/kogito-helm-charts
 kubectl create namespace kogito-helm
-git clone https://github.com/Kevin-Mok/kogito-helm-charts.git
-cd kogito-helm-charts
 export NODE_INTERNAL_IP=$(kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }')
 kubectl config set-context --current --namespace=kogito-helm
 ```
