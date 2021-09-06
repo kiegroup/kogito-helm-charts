@@ -6,6 +6,6 @@ By default, this will deploy the basic Kogito [process-quarkus-example](https://
 image which I have uploaded onto 
 [Quay](https://quay.io/repository/kmok/process-quarkus-example?tab=tags). Follow the [initial setup](../README.md#Usage), then run these commands:
 ```sh
-helm install process-quarkus-example kogito-basic
+helm install process-quarkus-example kogito/kogito-basic
 curl -d '{"approver" : "john", "order" : {"orderNumber" : "12345", "shipped" : false}}' -H "Content-Type: application/json" -X POST http://$NODE_INTERNAL_IP:32000/orders
 ```
