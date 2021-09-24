@@ -4,6 +4,7 @@
 
 replicaCount: 1
 
+openshift: true
 runtime: quarkus
 
 image:
@@ -99,3 +100,13 @@ postgresql:
       CREATE TABLE public.process_instances ( id uuid NOT NULL, payload bytea NOT NULL, process_id character varying NOT NULL, version bigint);
       ALTER TABLE public.process_instances OWNER TO "kogito-user";
       ALTER TABLE ONLY public.process_instances ADD CONSTRAINT process_instances_pkey PRIMARY KEY (id);
+  volumePermissions:
+    securityContext:
+      runAsUser: auto
+  securityContext:
+    enabled: false
+  containerSecurityContext:
+    enabled: false
+  shmVolume:
+    chmod:
+      enabled: false
