@@ -23,6 +23,7 @@ export KOGITO_URL=$(kubectl get nodes -o jsonpath='{ $.items[0].status.addresses
 ## Expected Output
 ```
 > curl -X POST -H 'Content-Type:application/json' -H 'Accept:application/json' -d '{"name" : "my fancy deal", "traveller" : { "firstName" : "John", "lastName" : "Doe", "email" : "jon.doe@example.com", "nationality" : "American","address" : { "street" : "main street", "city" : "Boston", "zipCode" : "10005", "country" : "US" }}}' http://$KOGITO_URL/deals
+{"id":"57233bda-ba20-4640-8ddd-650f16ce58b9","review":null,"name":"my fancy deal","traveller":{"firstName":"John","lastName":"Doe","email":"jon.doe@example.com","nationality":"American","address":{"street":"main street","city":"Boston","zipCode":"10005","country":"US"}}}
 ```
 
 # PostgreSQL Setup
@@ -53,33 +54,10 @@ For example:
 helm install --values sql-script.yaml process-postgresql-persistence-quarkus kogito-postgresql
 ```
 
-## Concurrency Issues
+## Readiness Check
 Since the Kogito application and PostgreSQL instance are 
 started at the same time, concurrency issues can occur when 
 the Kogito application expects the database to be ready when 
 it is not.
 
-### Health Check
-Integrating something like the [SmallRye 
-Health extension](https://quarkus.io/guides/smallrye-health) 
-for a Quarkus Kogito application is strongly recommended. In 
-the SmallRye Health documentation, they show how you can 
-implement a [readiness health check 
-procedure](https://quarkus.io/guides/smallrye-health#adding-a-readiness-health-check-procedure) 
-for a database connection. This way, the pod will not accept 
-traffic until a connection to the database is established.
-
-### Initializing Necessary Tables
-Another concurrency issue that can arise is when the Kogito 
-application only creates its necessary tables on startup 
-(see [KOGITO-5775](https://issues.redhat.com/browse/KOGITO-5775)). 
-In this scenario, even after a connection to the database is established, 
-the Kogito application will try to insert a row into a 
-non-existent table. There are 2 possible solutions to this 
-problem:
-1. In the Kogito application's code, check if the table 
-exists before inserting into it. If it does not exist, 
-create it first.
-2. Initialize the table in `init.sql` as a value as 
-described in [the section above](#init.sql). This is the 
-method used for the default example in this chart.
+To solve this issue, an `initContainers` is implemented to delay startup of the Kogito application until the database is ready to start receiving connections. 
