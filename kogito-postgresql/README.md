@@ -10,13 +10,13 @@ image is compiled using the `jdbc-persistence`. Follow the [initial setup](../RE
 in the base directory of the repository:
 ## OpenShift
 ```sh
-helm install process-postgresql-persistence-quarkus kogito/kogito-postgresql
-export KOGITO_URL=$(kubectl get routes -o jsonpath="{.items[?(@.metadata.name=='process-postgresql-persistence-quarkus')].spec.host}")
+helm install process-postgresql kogito/kogito-postgresql
+export KOGITO_URL=$(kubectl get routes -o jsonpath="{.items[?(@.metadata.name=='process-postgresql')].spec.host}")
 ```
 
 ## Other (e.g. minikube)
 ```sh
-helm install --set openshift=false process-postgresql-persistence-quarkus kogito/kogito-postgresql
+helm install --set openshift=false process-postgresql kogito/kogito-postgresql
 export KOGITO_URL=$(kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }'):32000
 ```
 

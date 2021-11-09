@@ -34,7 +34,11 @@ helm install --namespace kogito-helm --set image.repository=quay.io/kmok/process
 ```
 
 # Applications Exposed By Default
-For ease of use and demonstration purposes, the Kogito application will be exposed with a `NodePort` by default and uses port 32000.
+For ease of use and demonstration purposes, the Kogito application will be exposed by default.
+On OpenShift, a `Route` is created by default to expose the application.
+On Kubernetes, the application is exposed with a `NodePort` by default and uses port 32000.
+
+Note that OpenShift Route hosts are limited to 63 characters, so long chart names may cause route creation issues.
 
 # Road Map
 ## Operator-Less
