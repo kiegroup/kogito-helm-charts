@@ -54,7 +54,7 @@ For example:
 helm install --values sql-script.yaml process-postgresql-persistence-quarkus kogito-postgresql
 ```
 
-## Readiness Check
+## Race Condition Issues
 Since the Kogito application and PostgreSQL instance are 
 started at the same time, concurrency issues can occur when 
 the Kogito application expects the database to be ready when 
