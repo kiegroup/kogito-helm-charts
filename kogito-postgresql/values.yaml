@@ -8,7 +8,6 @@ openshift: true
 runtime: quarkus
 
 image:
-  # repository: quay.io/vajain/process-postgresql-persistence-quarkus
   repository: quay.io/kmok/process-postgresql-persistence-quarkus
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.

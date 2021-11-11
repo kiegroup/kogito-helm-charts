@@ -8,8 +8,7 @@ openshift: true
 runtime: quarkus
 
 image:
-  repository: quay.io/kmok/process-quarkus-example
-  # repository: quay.io/kmok/process-springboot-example
+  repository: quay.io/kiegroup/examples-process-quarkus-example
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"

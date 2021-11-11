@@ -4,7 +4,7 @@ This is a Helm chart to deploy a Kogito application with no frills.
 # Example Usage
 By default, this will deploy the basic Kogito [process-quarkus-example](https://github.com/kiegroup/kogito-examples/tree/stable/process-quarkus-example) 
 image which I have uploaded onto 
-[Quay](https://quay.io/repository/kmok/process-quarkus-example?tab=tags). Follow the [initial setup](../README.md#Usage), then run these commands 
+[Quay](https://quay.io/repository/kiegroup/examples-process-quarkus-example). Follow the [initial setup](../README.md#Usage), then run these commands 
 in the base directory of the repository:
 ## OpenShift
 ```sh
