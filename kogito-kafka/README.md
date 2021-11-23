@@ -1,6 +1,5 @@
-# Kogito PostgreSQL Helm Chart
-This is a Helm chart to deploy a Kogito application with PostgreSQL 
-persistence. 
+# Kogito Kafka Helm Chart
+This is a Helm chart to deploy a Kogito application with Apache Kafka integration.
 
 # Example Usage
 By default, this will deploy the Kogito [process-kafka-quickstart-quarkus](https://github.com/kiegroup/kogito-examples/tree/stable/process-kafka-quickstart-quarkus) 
