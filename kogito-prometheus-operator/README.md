@@ -20,7 +20,7 @@ example](https://github.com/kiegroup/kogito-examples/tree/stable/kogito-travel-a
 image which I have uploaded onto 
 [Quay](https://quay.io/repository/kmok/kogito-travel-agency-basic?tab=tags). Follow the [initial setup](../README.md#Usage), then run these commands:
 ```sh
-helm install travel-agency-basic kogito-prometheus-operator
+helm install travel-agency-basic kogito/kogito-prometheus-operator
 curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST "http://$NODE_INTERNAL_IP:32000/travels" -d @- << EOF
 {
   "traveller" : {

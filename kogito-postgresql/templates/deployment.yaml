@@ -27,6 +27,10 @@ spec:
       serviceAccountName: {{ include "kogito-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: init-postgres
+        image: postgres
+        command: ['sh', '-c', 'until pg_isready --host={{ include "kogito-app.postgresqlName" . }} --port=5432 --username=postgres; do echo waiting for postgresql; sleep 2; done;']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
